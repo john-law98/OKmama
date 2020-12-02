@@ -1,0 +1,6 @@
+framework module Pods_OKmamaNovember_OKmamaNovemberUITests {
+  umbrella header "Pods-OKmamaNovember-OKmamaNovemberUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

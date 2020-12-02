@@ -9,7 +9,12 @@ import SwiftUI
 import AVFoundation
 import AVKit
 
+//import SwiftAudioPlayer
+
 struct ContentView: View {
+	
+	@State private var timer = Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect()
+	
 //    var body: some View {
 //        Text("Hello, world!")
     //            .padding()
@@ -19,6 +24,9 @@ struct ContentView: View {
     @State var isPlaying : Bool = false
     
     var body: some View {
+		
+		var time : TimeInterval = 0.0
+		
         VStack {
             
         
@@ -52,8 +60,18 @@ struct ContentView: View {
 		.padding()
             Text("Welcome to OK mama!")
                 .font(Font.custom("FredokaOne-Regular", size: 20))
-			
+				.onReceive(timer){ _ in
+					if let currentTime = self.audioPlayer?.currentTime {
+						if abs(currentTime - time) < 0.1 { // only explicitly
+						   self.isPlaying = false
+						}
+					}
+				}
 		} // end VStack
+		
+		.onAppear(perform: {
+			time = self.audioPlayer?.duration ?? 0.0
+		})
 		
         } // end View
     
