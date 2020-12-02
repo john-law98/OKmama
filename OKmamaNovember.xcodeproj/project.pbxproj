@@ -13,6 +13,8 @@
 		5213CB292544B87B00CD0D46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5213CB282544B87B00CD0D46 /* Preview Assets.xcassets */; };
 		5213CB342544B87C00CD0D46 /* OKmamaNovemberTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5213CB332544B87C00CD0D46 /* OKmamaNovemberTests.swift */; };
 		5213CB3F2544B87C00CD0D46 /* OKmamaNovemberUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5213CB3E2544B87C00CD0D46 /* OKmamaNovemberUITests.swift */; };
+		5213CB502544BC1700CD0D46 /* 1_3_.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5213CB4F2544BC1700CD0D46 /* 1_3_.mp3 */; };
+		5213CB552544BE7E00CD0D46 /* FredokaOne-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5213CB542544BE7D00CD0D46 /* FredokaOne-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		5213CB3A2544B87C00CD0D46 /* OKmamaNovemberUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OKmamaNovemberUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5213CB3E2544B87C00CD0D46 /* OKmamaNovemberUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKmamaNovemberUITests.swift; sourceTree = "<group>"; };
 		5213CB402544B87C00CD0D46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5213CB4F2544BC1700CD0D46 /* 1_3_.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1_3_.mp3; sourceTree = "<group>"; };
+		5213CB542544BE7D00CD0D46 /* FredokaOne-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FredokaOne-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +79,7 @@
 		5213CB152544B87800CD0D46 = {
 			isa = PBXGroup;
 			children = (
+				5213CB4F2544BC1700CD0D46 /* 1_3_.mp3 */,
 				5213CB202544B87800CD0D46 /* OKmamaNovember */,
 				5213CB322544B87C00CD0D46 /* OKmamaNovemberTests */,
 				5213CB3D2544B87C00CD0D46 /* OKmamaNovemberUITests */,
@@ -95,6 +100,7 @@
 		5213CB202544B87800CD0D46 /* OKmamaNovember */ = {
 			isa = PBXGroup;
 			children = (
+				5213CB542544BE7D00CD0D46 /* FredokaOne-Regular.ttf */,
 				5213CB212544B87800CD0D46 /* OKmamaNovemberApp.swift */,
 				5213CB232544B87800CD0D46 /* ContentView.swift */,
 				5213CB252544B87B00CD0D46 /* Assets.xcassets */,
@@ -103,6 +109,7 @@
 			);
 			path = OKmamaNovember;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		5213CB272544B87B00CD0D46 /* Preview Content */ = {
 			isa = PBXGroup;
@@ -233,6 +240,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5213CB552544BE7E00CD0D46 /* FredokaOne-Regular.ttf in Resources */,
+				5213CB502544BC1700CD0D46 /* 1_3_.mp3 in Resources */,
 				5213CB292544B87B00CD0D46 /* Preview Assets.xcassets in Resources */,
 				5213CB262544B87B00CD0D46 /* Assets.xcassets in Resources */,
 			);
