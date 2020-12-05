@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "OKmamaLogo.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
