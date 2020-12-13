@@ -9,6 +9,7 @@ import SwiftUI
 // these import statments allow me to use audio
 import AVFoundation
 import AVKit
+import SoundAnalysis
 
 
 // This structure represents the "view" that the user sees when opening the app
@@ -24,7 +25,7 @@ struct ContentView: View {
 	
 	// Need a timer to help determine when play/pause button changes state
 	@State var playValue: TimeInterval = 0.0
-	@State private var timer = Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect()
+	@State private var timer = Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect() // Timer established with refresh rate
 	@State private var playerDuration: TimeInterval = 120
 
     var body: some View {
@@ -61,19 +62,20 @@ struct ContentView: View {
 			// "label" modifies the button's image
         }, label: {
             if isPlaying {
-                Image(systemName: "pause").font(Font.system(.largeTitle).bold())
-				// isPlaying = false;
-
+                Image(systemName: "pause").font(Font.system(.largeTitle).bold()) // pause button
             } else {
-                Image(systemName: "play.fill").font(Font.system(.largeTitle).bold())
+                Image(systemName: "play.fill").font(Font.system(.largeTitle).bold()) // play button
 
             }
 
         }) // end button, reset timer
 		.padding()
 				.onReceive(timer){ _ in
-					if let currentTime = self.audioPlayer?.currentTime {
-						if abs(currentTime - time) < 0.1 { // only explicitly
+					if let currentTime = self.audioPlayer?.currentTime { // creates currentTime variable
+						
+						// Checks for equality between currentTIme and time.
+						// Use of inequality for comparison of floating point values
+						if abs(currentTime - time) < 0.1 {
 						   self.isPlaying = false
 						}
 					}
@@ -113,3 +115,4 @@ struct ContentView_Previews: PreviewProvider {
 //func changeSliderValue() {
 //	self.audioPlayer?.currentTime = playValue
 //}
+
