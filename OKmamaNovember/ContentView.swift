@@ -5,20 +5,24 @@
 //  Created by John Lawrence on 10/24/20.
 //
 import SwiftUI
+
+// these import statments allow me to use audio
 import AVFoundation
 import AVKit
 
-//import SwiftAudioPlayer
 
+// This structure represents the "view" that the user sees when opening the app
+// Launch screen is specified in info.plist
 struct ContentView: View {
 	
-	func changeSliderValue() {
-		self.audioPlayer?.currentTime = playValue
-	}
-
-
+	// AudioPlayer variable
     @State var audioPlayer:AVAudioPlayer?
-    @State var isPlaying : Bool = false
+	@State var isPlaying : Bool = false
+
+	// Initialization of a slider variable -- not used
+	@State var sliderr: UISlider!
+	
+	// Need a timer to help determine when play/pause button changes state
 	@State var playValue: TimeInterval = 0.0
 	@State private var timer = Timer.publish(every: 1, tolerance: 0.1, on: .main, in: .common).autoconnect()
 	@State private var playerDuration: TimeInterval = 120
@@ -27,13 +31,17 @@ struct ContentView: View {
 
 		var time : TimeInterval = 0.0
 
+		// Vertical and horizontal stacks (VStack, HStack) are for organization of objects
 		VStack {
 			Text("Welcome to OK mama!")
 				.font(Font.custom("FredokaOne-Regular", size: 20))
 				.padding()
 		HStack {
+			
+			// Progress bar goes here. See below for code to use to implement
 
-
+			
+			// This button object is linked to the audio file "1_3_", which is stored in this project
         Button(action: {
             if let path = Bundle.main.path(forResource: "1_3_", ofType: ".mp3"){
                 self.audioPlayer = AVAudioPlayer()
@@ -45,11 +53,12 @@ struct ContentView: View {
                     self.audioPlayer?.prepareToPlay()
                     self.audioPlayer?.play()
 
-                } catch {
+                } catch  {
                     print("Error")
                 }
-
             }
+			
+			// "label" modifies the button's image
         }, label: {
             if isPlaying {
                 Image(systemName: "pause").font(Font.system(.largeTitle).bold())
@@ -60,7 +69,7 @@ struct ContentView: View {
 
             }
 
-        }) // end button
+        }) // end button, reset timer
 		.padding()
 				.onReceive(timer){ _ in
 					if let currentTime = self.audioPlayer?.currentTime {
@@ -69,22 +78,7 @@ struct ContentView: View {
 						}
 					}
 				}
-			
-//		Text(String(playValue))
-//			.font(Font.custom("FredokaOne-Regular", size: 14))
-//			.onReceive(timer, perform: { _ in
-//				if self.isPlaying {
-//					if let currentTime = self.audioPlayer?.currentTime {
-//						self.playValue = currentTime;
-//					}
-//				}
-//			})
-			
 		
-			Slider(value: $playValue, in: TimeInterval(0.0)...playerDuration, onEditingChanged: { _ in
-				self.changeSliderValue()
-			})
-			.frame(width: 150, height: 10, alignment: Alignment.center)
 		} // end HStack
 			
 		} // end VStack
@@ -92,8 +86,7 @@ struct ContentView: View {
 			time = self.audioPlayer?.duration ?? 0.0
 		})
 
-        } // end View
-
+	} // end View
 }
 
 
@@ -103,79 +96,20 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-
-
-
-
-////
-//
-//struct BubbleAudio: View {
-//
-//let text: String
-//var unzipPath: URL
-//
-//@State private var playValue: TimeInterval = 0.0
-//@State private var isPlaying: Bool = false
-//
-//@State private var playerDuration: TimeInterval = 120
-//
-//@State private var timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-//
-//var body: some View {
-//	VStack {
-//		Text(playValue.stringFromTimeInterval())
-//		.font(.system(size: 11, weight: .light))
-//		.offset(y: +10)
-//		.onReceive(timer) { _ in
-//			if self.isPlaying {
-//				if let currentTime = Sounds.audioPlayer?.currentTime {
-//					self.playValue = currentTime
+/**
+		CODE TO BE USED IF SLIDER/PROGRESS BAR IS IMPLEMENTED
+*/
+//				if audioPlayer == nil {
+//					print("Error: \(String(describing: error))")
 //				}
-//			}
-//			else {
-//				self.isPlaying = false
-//				self.timer.upstream.connect().cancel()
-//			}
-//		}
-//		HStack {
-//			Button(action: {
-//				if self.isPlaying {
-//					self.isPlaying.toggle()
-//					Sounds.audioPlayer?.pause()
-//				}
-//				else {
-//					self.timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
-//					if Sounds.playWAAudio(text: self.text, unzipPath: self.unzipPath) {
-//						self.isPlaying.toggle()
-//					}
-//				}
-//			}, label: {
-//				  if isPlaying {
-//					Image(systemName: "pause")
-//					.font(Font.system(.title).bold())
-//				  }
-//				  else {
-//					Image(systemName: "play.fill")
-//					.font(Font.system(.title).bold())
-//				  }
-//			})
-//			.frame(width: 35)
-//			.fixedSize()
+//				sliderr.maximumValue = Float(CMTimeGetSeconds(audioPlayer!.duration))
+//				sliderr.value = Float(CMTimeGetSeconds(audioPlayer!.currentTime))
+//
 //			Slider(value: $playValue, in: TimeInterval(0.0)...playerDuration, onEditingChanged: { _ in
 //				self.changeSliderValue()
 //			})
-//			.frame(width: 200, height: 10, alignment: Alignment.center)
-//			Text(playerDuration.stringFromTimeInterval())
-//			.font(.system(size: 11, weight: .light))
-//		}
-//	}
-//	.onAppear() {
-//		self.playerDuration = Sounds.getDuration(text: self.text, unzipPath: self.unzipPath)
-//		print(self.playerDuration)
-//	}
-//}
-//
+//			.frame(width: 150, height: 10, alignment: Alignment.center)
+
 //func changeSliderValue() {
-//	Sounds.audioPlayer?.currentTime = playValue
-//}
+//	self.audioPlayer?.currentTime = playValue
 //}
